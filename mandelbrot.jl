@@ -5,6 +5,7 @@ module MandelBrot
 #remember the mandelbrot is symmetrical about the real number plane
 
 function mandel(c)
+    #determine if a number is in the set or not in the set - 
     const max_iter = 1000
     const bound = 2
     z = 0
@@ -32,5 +33,22 @@ function brot(n)
     else
         c=(0,0,0)
     end
+    return c
 end
 #mrandom
+
+function mandelbrot(reals,imags)
+    #generate #real amount of points between -2 and 1
+    #and #imag amount of points between 0 and i
+    #determine if any of those combinations are in the mandelbrot set
+    r = LinRange(-2,1,reals)
+    i = Linrange(0,1,imags)
+        for real_num in r
+            for imaginary_num in i
+                z = complex(real_num, imaginary_num)
+                n = mandel(z)
+                color = brot(n)
+                #TODO: plot real part of z and imaginary part of z with color n
+            end
+        end
+    end
