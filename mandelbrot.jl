@@ -48,6 +48,7 @@ function mandelbrot(reals,imags)
                 z = complex(real_num, imaginary_num)
                 n = mandel(z)
                 color = brot(n)
+                #TODO: actually, dont do it like this - need to make a matrix with all values first for sped + memory               
                 #TODO: plot real part of z and imaginary part of z with color n
             end
         end
