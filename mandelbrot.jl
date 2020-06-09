@@ -53,3 +53,5 @@ function mandelbrot(reals,imags)
             end
         end
     end
+#make a bunch of comments
+x = 3
