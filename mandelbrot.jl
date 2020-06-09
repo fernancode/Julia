@@ -11,6 +11,8 @@ function mandel(c)
     z = 0
     n = 0
     #if the magnitude of z exceeds two we know we are done.
+
+    #TODO:MAKE a break that breaks the loop if any values in the caluclation REPEAT,meaning PART OF THE SET.
     while abs(z)<bound && n<max_iter
         z = z^2+c
         n+=1
@@ -53,5 +55,3 @@ function mandelbrot(reals,imags)
             end
         end
     end
-#make a bunch of comments
-x = 3
