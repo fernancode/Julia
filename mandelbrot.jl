@@ -44,7 +44,7 @@ function mandelbrot(reals,imags)
     #and #imag amount of points between 0 and i
     #determine if any of those combinations are in the mandelbrot set
     r = LinRange(-2,1,reals)
-    i = LinRange(0,1,imags)
+    i = LinRange(-1,1,imags)
     master_list = zeros(Complex{Float64},reals*imags,1)
     color_assign = Array{RGB{Float64}}(undef,reals*imags,1)
     #n = Threads.Atomic{Int64}(1)
@@ -62,7 +62,7 @@ function mandelbrot(reals,imags)
                 #Threads.atomic_add!(n,1)
             end
         end
-        gr(markerstrokewidth=0,markerstrokealpha=0,markersize=1,legend=false)
+        gr(markerstrokewidth=0,markerstrokealpha=0,markersize=.5,legend=false)
         scatter(master_list,markerstrokecolor=color_assign,color=color_assign,aspect_ratio=:equal)
     end
 
