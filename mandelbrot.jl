@@ -1,5 +1,5 @@
 module MandelBrot
-using Plots
+using Plots, GR
 #make some functions for mandelbrot stuff
 #find out if a number is part of the set
 #remember the mandelbrot is symmetrical about the real number plane
@@ -41,8 +41,8 @@ end
 
 function mandelbrot(reals,imags)
     #generate #real amount of points between -2 and 1
-    #and #imag amount of points between 0 and i
-    #determine if any of those combinations are in the mandelbrot set
+    #and #imag amount of points between -i and i
+    #determine if any of those combinations are in the mandelbrot set and color map it accordingly
     r = LinRange(-2,1,reals)
     i = LinRange(-1,1,imags)
     master_list = zeros(Complex{Float64},reals*imags,1)
@@ -51,9 +51,6 @@ function mandelbrot(reals,imags)
     n = 1
         Threads.@threads for real_num in r
             for imaginary_num in i
-                #z = complex(real_num, imaginary_num) #create the number
-                #master_list[n] = z                      #add it to the list
-                #color_assign[n,1] = (brot ∘ mandel)(z) #function of function! \circ + tab
 
                 #or would this be faster? since we dont change z all the time?
                 master_list[n] = complex(real_num, imaginary_num)
@@ -63,7 +60,7 @@ function mandelbrot(reals,imags)
             end
         end
         gr(markerstrokewidth=0,markerstrokealpha=0,markersize=.5,legend=false)
-        scatter(master_list,markerstrokecolor=color_assign,color=color_assign,aspect_ratio=:equal)
+        Plots.scatter(master_list,markerstrokecolor=color_assign,color=color_assign,aspect_ratio=:equal)
     end
 
 #end statement for the module
