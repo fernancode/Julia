@@ -47,19 +47,21 @@ function mandelbrot(reals,imags)
     i = LinRange(-1,1,imags)
     master_list = zeros(Complex{Float64},reals*imags,1)
     color_assign = Array{RGB{Float64}}(undef,reals*imags,1)
-    #n = Threads.Atomic{Int64}(1)
-    n = 1
-        Threads.@threads for real_num in r
-            for imaginary_num in i
-
-                #or would this be faster? since we dont change z all the time?
+    #initiate threading for total number of real numbers stated
+    Threads.@threads for a in 1:reals
+        #the real number we are using is indexed
+        real_num = r[a]
+            #enumeration is used so we can get the iterator and the value
+            for (b, imaginary_num) in enumerate(i)
+                #we create a unique index [n] for every permutation of the numbers that exists
+                n = (a-1)*imags + b
                 master_list[n] = complex(real_num, imaginary_num)
                 color_assign[n,1] = (brot ∘ mandel)(complex(real_num, imaginary_num))
                 n+=1
-                #Threads.atomic_add!(n,1)
             end
         end
-        gr(markerstrokewidth=0,markerstrokealpha=0,markersize=.5,legend=false)
+        
+        gr(markerstrokewidth=0,markerstrokealpha=0,markersize=.1,legend=false)
         Plots.scatter(master_list,markerstrokecolor=color_assign,color=color_assign,aspect_ratio=:equal)
     end
 
