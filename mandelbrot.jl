@@ -38,13 +38,12 @@ function brot(n)
 end
 #mrandom
 
-
-function mandelbrot(reals,imags)
+function mandelbrot(reals,imags,r_min=-2,r_max=1,i_min=-1,i_max=1)
     #generate #real amount of points between -2 and 1
     #and #imag amount of points between -i and i
     #determine if any of those combinations are in the mandelbrot set and color map it accordingly
-    r = LinRange(-2,1,reals)
-    i = LinRange(-1,1,imags)
+    r = LinRange(r_min,r_max,reals)
+    i = LinRange(i_min,i_max,imags)
     master_list = zeros(Complex{Float64},reals*imags,1)
     color_assign = Array{RGB{Float64}}(undef,reals*imags,1)
     #initiate threading for total number of real numbers stated
@@ -60,8 +59,7 @@ function mandelbrot(reals,imags)
                 n+=1
             end
         end
-        
-        gr(markerstrokewidth=0,markerstrokealpha=0,markersize=.1,legend=false)
+        gr(markerstrokewidth=0,markerstrokealpha=0,markersize=.05,legend=false)
         Plots.scatter(master_list,markerstrokecolor=color_assign,color=color_assign,aspect_ratio=:equal)
     end
 
