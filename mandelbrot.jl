@@ -42,7 +42,17 @@ function mandelplot(master_list, n)
     Plots.scatter(real.(master_list),imag.(master_list), zcolor = n, m = :thermal,  aspect_ratio = :equal)
 end
 
+function mandelplot2(master_list, n)
+    gr(seriesalpha = .8, markerstrokewidth = 0, markerstrokealpha = 0, markersize = .01, legend = false, background_color = RGB(0,0,0))
+    #Plots.scatter()
+    imshow([real.(master_list), imag.(master_list)])#, zcolor = n, m = :thermal)
+end
+
 function make_image(master_list,n)
+    #TODO: try making an image directly becuase this is WAY faster
+    #maybe making an image would be faster than plotting
+    #need to create a matrix z and then populate with color vals\
+    imshow([100,50,25,0])
 end
 
 function add2mandelplot(master_list, n)
